@@ -1,0 +1,157 @@
+\documentclass[12pt]{report}
+\def\TITULO{Título}
+\def\subtitulo{Subtítulo}
+\def\autora{Autor}
+\def\correoa{correo@alumnos.ulagos.cl}
+\def\autorb{Autor}
+\def\correob{correo@alumnos.ulagos.cl}
+\def\autorc{Autor}
+\def\correoc{correo@alumnos.ulagos.cl}
+\def\autord{Autor}
+\def\correod{correo@alumnos.ulagos.cl}
+\def\asignatura{Asignatura}
+\def\campus{Campus ???}
+\def\carrera{Ingeniería Civil en Informática}
+\input{Macros}
+
+\lstset{language=Python}
+
+\begin{document}
+
+	%%%%%%%%%%%PORTADA%%%%%%%%%%%%%%%%%%%%%
+%\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+\maketitle
+
+\cleardoublepage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+%INDICE GENERAL
+
+\tableofcontents
+
+%INDICE DE FIGURAS
+\listoffigures
+%INDICE DE TABLAS
+%\renewcommand{\listtablename}{Índice de tablas}\listoftables
+%\renewcommand{\lstlistlistingname}{Índice de algoritmos}
+%\lstlistoflistings
+%\addcontentsline
+%%%%%%%%%%%%%FIN PORTADA%%%%%%%%%%%%%%%%
+
+%\thispagestyle{empty}
+%\begin{abstract}
+%\end{abstract}
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+
+
+
+%%%%%%%RESUMEN%%%%%%%%%%%
+
+
+
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+
+
+
+
+%%%%%%%%COMIENZO
+
+
+
+
+
+\chapter{Introducción}
+En el presente informe, se realizará la implementación de una aplicación web mediante el uso de \textbf{Docker}. El propósito central de este trabajo es desplegar un entorno de desarrollo que incluya tanto un servidor web con PHP como una base de datos MySQL, utilizando \textbf{Docker Compose} para gestionar ambos servicios de manera integrada. 
+
+A lo largo del documento, se describirá cómo se configuró la comunicación entre estos componentes, asegurando que la aplicación sea capaz de ejecutar operaciones \textbf{CRUD} (crear, leer, modificar y borrar datos) y que la información almacenada se mantenga persistente. Finalmente, mostraremos las evidencias que confirman que el sistema funciona correctamente.
+
+
+\chapter{Desarrollo}
+En esta sección se detalla el proceso de despliegue de la aplicacion web utilizando \textbf{Docker} y \textbf{Docker Compose}.
+
+\section{Construcción de imágenes}
+
+El primer paso consistió en la compilación de la imagen base de la aplicación. Mediante eel comando \texttt{docker compose build}, se ejecuto el \texttt{Dockerfile} configurado, el cual instala las dependencias necesarias de \textbf{PHP} para la conexión a la base de datos.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{lab/image1.png}
+    \caption{docker compose build}
+    \label{fig:build}
+\end{figure}
+
+\newpage
+\section{Ejecución de contenedores}
+
+Una vez construidas las imágenes, se procedió a levantar el stack completo de servicios. El comando \texttt{docker compose up -d} despliega la aplicación y la base de datos en una red virtual aislada, permitiendo la comunicación interna entre ellas.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{lab/image2.png}
+    \caption{docker compose up -d}
+    \label{fig:compose}
+\end{figure}
+
+\section{Verificación de contenedores activos}
+
+Tras ejecutar el despliegue del stack mediante el comando \texttt{docker compose up -d}, se utilizó el comando \texttt{docker ps} para validar el estado de los servicios. Como se aprecia en la figura \ref{fig:ps}, ambos contenedores (\texttt{php\_crud\_app} y \texttt{mysql\_crud\_db}) se encuentran en estado Up, confirmando que el entorno web y la base de datos están operando en sus puertos asignados y dentro de la red virtual definida.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{lab/image3.png}
+    \caption{docker ps}
+    \label{fig:ps}
+\end{figure}
+
+\section{Verificación de logs y red}
+
+Para asegurar que el servicio de base de datos \textbf{MySQL} haya iniciado correctamente, se inspeccionaron los logs del contenedor mediante \texttt{docker logs mysql\_crud\_db}. Esto permite verificar la inicialización de los archivos de datos y la apertura del puerto 3306.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{lab/image4.png}
+    \caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\section{Prueba funcional}
+
+Finalmente, se accedió a la interfaz web mediante el navegador. Se verificó que la aplicacion permite realizar las operaciones \textbf{CRUD} (Crear, Leer, Modificar y Borrar) contra la base de datos persistente
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\linewidth]{lab/image5.png}
+    \hfill
+    \includegraphics[width=0.45\linewidth]{lab/image6.png}
+    \caption{Descripción de ambas imágenes.}
+    \label{fig:imagenes_juntas}
+\end{figure}
+
+
+
+
+\chapter{Conclusión}
+En el presente informe, se logró llevar a cabo la implementación exitosa de una aplicación web funcional utilizando contenedores. A través de este ejercicio, consolidamos el uso de \textbf{Docker} como herramienta para simplificar el despliegue de proyectos, permitiendo que la aplicación y su base de datos se conecten de forma organizada y eficiente.
+
+Además, confirmamos que mediante el uso de unidades de almacenamiento persistente garantizamos la integridad de la información, evitando cualquier pérdida de datos al reiniciar los servicios. En resumen, este trabajo nos permitió integrar conocimientos técnicos sobre arquitectura de servicios web, logrando un sistema estable, fácil de implementar y con todas las operaciones de gestión de información plenamente operativas.
+
+
+
+
+%%%%%
+%agregar referencias
+%\bibliographystyle{IEEEtran}
+%\nocite{*} % mostrar todas las referencias aunque no esten citadas
+%\bibliography{bibliografia.bib}
+
+
+\end{document}
