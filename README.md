@@ -16,3 +16,8 @@ Este proyecto consiste en el despliegue de una aplicación web PHP con base de d
 ```bash
    git clone [https://github.com/j4vi3r1/Laboratorio2.git](https://github.com/j4vi3r1/Laboratorio2.git)
    cd Laboratorio2
+
+## Informe
+- Documento LaTeX (Informe)
+[https://www.overleaf.com/read/mvqvcbfkzfdf#632910]
+(https://www.overleaf.com/read/mvqvcbfkzfdf#632910)
